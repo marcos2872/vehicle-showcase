@@ -35,4 +35,26 @@ export default class CarModel {
       return null;
     }
   }
+
+  async updateCar(id: string, data: any) {
+    try {
+      const updated = await prisma.cars.update({
+        where: { id }, data,
+      });
+      return updated;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async deleteCar(id: string) {
+    try {
+      const deleted = await prisma.cars.delete({
+        where: { id },
+      });
+      return deleted;
+    } catch (error) {
+      return null;
+    }
+  }
 }

@@ -20,34 +20,25 @@ export default class CarController {
       
       return res.status(cod).json(rep);
     }
-    const { cod, rep } = await service.findCars();  
-    return res.status(cod).json(rep);
+    const { cod, resp } = await service.findCars();  
+    return res.status(cod).json(resp);
   };
 
-  // updateCar = async (req: Request, res: Response) => {
-  //   const { id } = req.params;
-  //   const car = req.body;
+  updateCar = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    
+    const { authorization } = req.headers as { authorization: string };
+    const car = req.body;
+    const service = new CarService();
 
-  //   try {      
-  //     const updated = await this._CarService.updateCarById(id, car);
-      
-  //     return updated ? res.status(200).json(updated)
-  //       : res.status(404).json({ message: 'Car not found' });
-  //   } catch (error) {
-  //     return res.status(422).json({ message: INVALID_MONGOID_MESSAGE });
-  //   }
-  // };
+    const { cod, resp } = await service.updateCar(id, car, authorization);
+    return res.status(cod).json(resp);
+  };
 
-  // deleteCarById = async (req: Request, res: Response) => {
-  //   const { id } = req.params;
-  //   try {
-  //     const result = await this._CarService.deleteCarById(id);
-  //     if (result) {
-  //       return res.status(404).json(result);
-  //     }
-  //     return res.sendStatus(204);
-  //   } catch (error) {
-  //     return res.status(422).json({ message: INVALID_MONGOID_MESSAGE });
-  //   }
-  // };
+  deleteCar = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const service = new CarService();
+    const { cod, resp } = await service.deleteCar(id);
+    return res.status(cod).json(resp);
+  };
 }
