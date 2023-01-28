@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./front-end
+    container_name: front-end_verzel
+    working_dir: /srv/front-end
+    env_file: .env
+    ports:
+      - '${PORT_FRONT}:${PORT_FRONT}'
+    restart: always
+    networks:
+      - project-verzel
+    depends_on:
+      - backend
+
+  backend:
+    container_name: back-end_verzel
+    build: ./back-end
+    tty: true
+    stdin_open: true
+    restart: always
+    working_dir: /srv/back-end
+    env_file:
+      - .env
+    ports:
+      - '${PORT_BACK}:${PORT_BACK}'
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+    networks:
+      - project-verzel
+
+  db:
+    image: mysql:8.0.21
+    container_name: db
+    platform: linux/x86_64
+    ports:
+      - 3506:3506
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    restart: 'always'
+    depends_on:
+      - storage
+
+  storage:
+    container_name: storage_verzel
+    build: ./storage
+    restart: always
+    working_dir: /srv/storage
+    volumes:
+      - ./:/app
+    networks:
+      - project-verzel
+
+networks:
+  project-verzel:
+    name: project-verzel
