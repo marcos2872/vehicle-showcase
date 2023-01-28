@@ -23,8 +23,6 @@ export default class UserModel {
   
       return user;
     } catch (error) {
-      console.log(error);
-      
       return null;
     }
   }

@@ -12,6 +12,7 @@ export default class UserService {
 
   async userLogin(email: string, pass: string) {
     const user = await this._userModel.userLogin(email);
+    
     if (!user) return { cod: 404, resp: { message: 'User not found' } };
 
     const verifyPassword = bcrypt.comparePassword(pass, user.password);
@@ -35,10 +36,9 @@ export default class UserService {
     const user = await this._userModel.userCreate({
       name, email, password: has,
     });
-    if (!user) return { cod: 400, resp: { message: '' } };
+    if (!user) return { cod: 409, resp: { message: 'E-mail already registered' } };
 
     const token = jwt.generateToken(user.id);
-    console.log(token);
 
     return { cod: 201,
       resp: {
