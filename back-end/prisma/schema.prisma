@@ -13,10 +13,10 @@ model Users {
   name     String
   email    String @unique
   password String
-  role     Role   @default(USER)
+  role     Role   @default(user)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("users")
 }
@@ -31,14 +31,20 @@ model Cars {
   mileage Int
   price   Float
   images  Json
+  status  Status @default(avaliable)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("cars")
 }
 
+enum Status {
+  avaliable
+  sold
+}
+
 enum Role {
-  USER
-  ADMIN
+  user
+  admin
 }
