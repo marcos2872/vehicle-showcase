@@ -15,4 +15,24 @@ export default class CarModel {
       return null;
     }
   }
+
+  async findCars() {
+    try {
+      const cars = await prisma.cars.findMany();
+
+      return cars;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async findCarById(id: string) {
+    try {
+      const cars = await prisma.cars.findUnique({ where: { id } });
+
+      return cars;
+    } catch (error) {
+      return null;
+    }
+  }
 }

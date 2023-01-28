@@ -1,44 +1,28 @@
 import { Request, Response } from 'express';
 import CarService from '../Services/CarService';
 
-// const INVALID_MONGOID_MESSAGE = 'Invalid mongo id';
-
 export default class CarController {
   createCar = async (req: Request, res: Response) => {
     const car = req.body.body;
     const { authorization } = req.headers as { authorization: string };
     const service = new CarService();
     
-    try {
-      const { cod, resp } = await service.createCar(JSON.parse(car), authorization);
-      return res.status(cod).json(resp);
-    } catch (error) {
-      return res.status(500).json((error as Error).message);
-    }
+    const { cod, resp } = await service.createCar(JSON.parse(car), authorization);
+    return res.status(cod).json(resp);
   };
 
-  // findCars = async (_req: Request, res: Response) => {
-  //   try {
-  //     const allCars = await this._CarService.findCars();
-      
-  //     return res.status(200).json(allCars);
-  //   } catch (error) {
-  //     return res.status(500).json((error as Error).message);
-  //   }
-  // };
+  findCars = async (req: Request, res: Response) => {
+    const { id } = req.query as { id: string };
+    const service = new CarService();
 
-  // findCarsById = async (req: Request, res: Response) => {
-  //   const { id } = req.params;
-  //   try {
-  //     const carId = await this._CarService.findCarsById(id);
-  //     if (!carId) {
-  //       return res.status(404).json({ message: 'Car not found' });
-  //     }
-  //     return res.status(200).json(carId);
-  //   } catch (error) {
-  //     return res.status(422).json({ message: INVALID_MONGOID_MESSAGE });
-  //   }
-  // };
+    if (id) {
+      const { cod, rep } = await service.findCarById(id);
+      
+      return res.status(cod).json(rep);
+    }
+    const { cod, rep } = await service.findCars();  
+    return res.status(cod).json(rep);
+  };
 
   // updateCar = async (req: Request, res: Response) => {
   //   const { id } = req.params;

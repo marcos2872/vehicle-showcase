@@ -42,22 +42,23 @@ export default class CarService {
     return { cod: 201, resp: { message: 'registered successfully' } };
   }
 
-  // async findCars() {
-  //   const carModel = new CarModel();
+  async findCars() {
+    const carModel = new CarModel();
 
-  //   const allCars = await carModel.find();
+    const allCars = await carModel.findCars();
 
-  //   return allCars.map((curr) => ({
-  //     id: curr._id,
-  //     model: curr.model,
-  //     year: curr.year,
-  //     color: curr.color,
-  //     status: curr.status,
-  //     buyValue: curr.buyValue,
-  //     doorsQty: curr.doorsQty,
-  //     seatsQty: curr.seatsQty,
-  //   }));
-  // }
+    return { cod: 200, rep: allCars };
+  }
+
+  async findCarById(id: string) {
+    const carModel = new CarModel();
+
+    const allCars = await carModel.findCarById(id);
+
+    if (!allCars) return { cod: 404, rep: { message: 'Not Found' } };
+
+    return { cod: 200, rep: allCars };
+  }
 
   // async findCarsById(id: string) {
   //   const carModel = new CarModel();
