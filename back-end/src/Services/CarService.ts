@@ -4,12 +4,13 @@ import fs from 'fs';
 import CarModel from '../Models/CarModel';
 import ICar from '../Interfaces/ICar';
 import 'dotenv/config';
+import jwt from '../utils/token';
+import prisma from '../Models/prisma';
 
 const { PORT } = process.env;
 
 export default class CarService {
-  async createCar(obj: ICar) {
-    const carModel = new CarModel();
+  fotmatImageArray(obj: ICar) {
     const { brand, model, year, mileage, price } = obj;
 
     const dirName = (brand + model + year + mileage + price).replace(' ', '');
@@ -19,6 +20,18 @@ export default class CarService {
     const arrayImages = imgs.reduce((acc: { url: string }[], curr: string) => (
       [...acc, { url: `http://localhost:${PORT}/images/${dirName}/${curr}`.replace(' ', '') }]
     ), []);
+    return arrayImages;
+  }
+
+  async createCar(obj: ICar, token: string) {
+    const carModel = new CarModel();
+    const { brand, model, year, mileage, price } = obj;
+    const arrayImages = this.fotmatImageArray(obj);
+
+    const id = jwt.tokenResolve(token);
+    const role = await prisma.users.findUnique({ where: { id } });
+    
+    if (role?.role === 'user') return { cod: 403, resp: { message: 'doesn\'t have permission' } };
     
     const newCar = await carModel.createCar({
       brand, model, year, mileage, price, images: arrayImages,

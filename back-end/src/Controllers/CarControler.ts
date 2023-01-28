@@ -6,10 +6,11 @@ import CarService from '../Services/CarService';
 export default class CarController {
   createCar = async (req: Request, res: Response) => {
     const car = req.body.body;
+    const { authorization } = req.headers as { authorization: string };
     const service = new CarService();
     
     try {
-      const { cod, resp } = await service.createCar(JSON.parse(car));
+      const { cod, resp } = await service.createCar(JSON.parse(car), authorization);
       return res.status(cod).json(resp);
     } catch (error) {
       return res.status(500).json((error as Error).message);

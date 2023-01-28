@@ -17,8 +17,6 @@ services:
   backend:
     container_name: back-end_verzel
     build: ./back-end
-    tty: true
-    stdin_open: true
     restart: always
     working_dir: /srv/back-end
     env_file:
@@ -46,8 +44,6 @@ services:
     container_name: storage_verzel
     build: ./storage
     restart: always
-    tty: true
-    stdin_open: true
     working_dir: /srv/storage
     networks:
       - project-verzel
