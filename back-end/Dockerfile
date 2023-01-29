@@ -4,9 +4,10 @@ WORKDIR /srv/back-end
 USER root
 
 COPY package*.json ./
-RUN ["npm", "i"] 
+COPY yarn* ./
+RUN ["yarn"] 
 COPY . .
 
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "dev"]
 
 

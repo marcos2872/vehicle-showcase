@@ -1,5 +1,5 @@
 {
-  "name": "car-shop",
+  "name": "verzel-back",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
@@ -7,6 +7,7 @@
     "start": "tsnd src/server.ts",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "db": "npx prisma migrate dev",
+    "db:example": "npx prisma migrate dev --name example",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest -i --verbose",
     "test:mocha": "mocha -r ts-node/register tests/**/**/*.test.ts --exit -t 60000",

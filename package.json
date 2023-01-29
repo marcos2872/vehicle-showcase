@@ -1,0 +1,17 @@
+{
+  "name": "verzel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "scripts": {
+    "db": "sudo docker-compose up -d && cd back-end && npm run db",
+    "dev": "sudo docker-compose -f docker-compose.app.yml up --build",
+    "back": "cd back-end && yarn &&  yarn dev",
+    "front": "cd front-end && yarn && tmux yarn dev"
+  },
+  "author": "Marcos",
+  "devDependencies": {
+  }
+}

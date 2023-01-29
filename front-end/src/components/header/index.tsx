@@ -16,17 +16,17 @@ const Header: React.FC = () => {
       <Nav>
       <Ul>
         <Li>
-          <NavLin to='/'style={{ color: `${url === '/' ? 'red' : 'back'}` }}>
+          <NavLin to='/'style={{ color: `${url === '/' ? '#4b7bc3' : '#525252'}` }}>
           Comprar carro
           </NavLin>
         </Li>
         <Li>
-          <NavLin to='/about' style={{ color: `${url === '/about' ? 'red' : 'back'}` }}>
+          <NavLin to='/about' style={{ color: `${url === '/about' ? '#4b7bc3' : '#525252'}` }}>
           Sobre nós
           </NavLin>
         </Li>
         <Li>
-          <NavLin to='/register' style={{ color: `${url === '/register' ? 'red' : 'back'}` }}>
+          <NavLin to='/register' style={{ color: `${url === '/register' ? '#4b7bc3' : '#525252'}` }}>
             <Icon />
           Cadastre-se
           </NavLin>

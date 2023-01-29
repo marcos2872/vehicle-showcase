@@ -3,6 +3,9 @@ import { Main } from './home.styles'
 import context from '../../context'
 import getCars from '../../utils/axios/getCars'
 import Header from '../../components/header'
+import Footer from '../../components/footer'
+import SearchBar from '../../components/searchBar'
+import Catalog from '../../components/catalog'
 
 const Home: React.FC = () => {
   const { setCars } = useContext(context)
@@ -17,6 +20,9 @@ const Home: React.FC = () => {
   return (
     <Main>
       <Header />
+      <SearchBar />
+      <Catalog />
+      <Footer />
     </Main>
   )
 }

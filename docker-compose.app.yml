@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./front-end
+    container_name: front-end_verzel
+    working_dir: /srv/front-end
+    ports:
+      - 5173:5173
+    restart: always
+    networks:
+      - project-verzel
+
+  backend:
+    container_name: back-end_verzel
+    build: ./back-end
+    restart: always
+    working_dir: /srv/back-end
+    ports:
+      - 5180:5180
+    networks:
+      - project-verzel
+
+networks:
+  project-verzel:
+    name: project-verzel

@@ -1,53 +1,40 @@
 version: '3'
 
 services:
-  frontend:
-    build: ./front-end
-    container_name: front-end_verzel
-    working_dir: /srv/front-end
-    env_file: .env
-    ports:
-      - '${PORT_FRONT}:${PORT_FRONT}'
-    restart: always
-    networks:
-      - project-verzel
-    depends_on:
-      - backend
-
-  backend:
-    container_name: back-end_verzel
-    build: ./back-end
-    restart: always
-    working_dir: /srv/back-end
-    env_file:
-      - .env
-    ports:
-      - '${PORT_BACK}:${PORT_BACK}'
-    depends_on:
-      db:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:5180"]
-      timeout: 10s
-      retries: 5
-    networks:
-      - project-verzel
-
-  db:
+  mysql:
     image: mysql:8.0.21
-    container_name: db
+    container_name: mysql
     platform: linux/x86_64
     ports:
-      - 3506:3306
+      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: 'always'
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 5
-    # depends_on:
-    #   - storage
+
+  # frontend:
+  #   build: ./front-end
+  #   container_name: front-end_verzel
+  #   working_dir: /srv/front-end
+  #   ports:
+  #     - 5173:5173
+  #   restart: always
+  #   networks:
+  #     - project-verzel
+  #   depends_on:
+  #     - backend
+
+  # backend:
+  #   container_name: back-end_verzel
+  #   build: ./back-end
+  #   restart: always
+  #   working_dir: /srv/back-end
+
+  #   ports:
+  #     - 5180:5180
+  #   networks:
+  #     - project-verzel
+  #   depends_on:
+  #     - mysql
 
   # storage:
   #   container_name: storage_verzel
