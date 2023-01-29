@@ -28,5 +28,3 @@ CREATE TABLE `cars` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO users (id, name, email, password, role, updated_at) VALUES
-    (uuid(), 'marcos', 'admin@verzel.com', '$2b$10$jMUzVcMZ0tjR0bACCuQ5keAeo.0p2Afm9ou5lWfrD8wi2abQZlI7O', 'admin', now()); /* 1234567890 */

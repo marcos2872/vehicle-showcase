@@ -24,7 +24,12 @@ services:
     ports:
       - '${PORT_BACK}:${PORT_BACK}'
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:5180"]
+      timeout: 10s
+      retries: 5
     networks:
       - project-verzel
 
@@ -37,16 +42,20 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: 'always'
-    depends_on:
-      - storage
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+    # depends_on:
+    #   - storage
 
-  storage:
-    container_name: storage_verzel
-    build: ./storage
-    restart: always
-    working_dir: /srv/storage
-    networks:
-      - project-verzel
+  # storage:
+  #   container_name: storage_verzel
+  #   build: ./storage
+  #   restart: always
+  #   working_dir: /srv/storage
+  #   networks:
+  #     - project-verzel
 
 networks:
   project-verzel:
