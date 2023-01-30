@@ -7,10 +7,11 @@ import './main.css'
 
 const ContextApi: React.FC = () => {
   const [cars, setCars] = useState([])
+  const [edit, setEdit] = useState(false)
 
   const ProviderValue = useMemo(
-    () => ({ cars, setCars }),
-    [cars, setCars]
+    () => ({ cars, setCars, edit, setEdit }),
+    [cars, setCars, edit, setEdit]
   )
   return <Context.Provider value={ProviderValue}><App /></Context.Provider>
 }

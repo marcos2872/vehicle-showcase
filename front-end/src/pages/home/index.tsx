@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { Main } from './home.styles'
+import React, { useContext, useEffect, useState } from 'react'
+import { PopoverComponent, LogOff, Main } from './home.styles'
 import context from '../../context'
 import getCars from '../../utils/axios/getCars'
 import Header from '../../components/header'
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
 
   return (
     <Main>
-      <Header />
+      <Header/>
       <SearchBar />
       <Catalog />
       <Footer />

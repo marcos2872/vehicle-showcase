@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { VscAccount } from '@react-icons/all-files/vsc/VscAccount'
+import { Popover } from '@headlessui/react'
+
+const { Button, Panel } = Popover
 
 export const Main = styled.main`
 display: flex;
@@ -44,4 +47,39 @@ gap: 5px;
 export const Icon = styled(VscAccount)`
 width: 20px;
 height: 20px;
+`
+export const Menu = styled(Popover)`
+`
+export const MenuButon = styled(Button)`
+display: flex;
+flex-direction: row;
+align-items: center;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+gap: 5px;
+border: 0 none;
+outline: 0;
+color: #525252;
+`
+export const MenuPanel = styled(Panel)`
+display: flex;
+flex-direction: column;
+background-color: #ffff;
+opacity: 0.9;
+box-shadow: 2px 2px 5px gray;
+border-radius: 10px;
+width: 200px;
+height: 400px;
+position: absolute;
+top: 60px;
+right: 10px;
+padding-left: 10px;
+padding-top: 10px;
+gap: 20px;
+`
+export const ButtonComun = styled.button`
+display: flex;
+align-items: center;
+gap: 10px;
+border: 0 none;
+outline: 0;
 `

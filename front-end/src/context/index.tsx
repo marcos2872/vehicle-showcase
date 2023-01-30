@@ -5,6 +5,8 @@ import ICar from '../interfaces/ICars'
 type context = {
   cars: ICar[] | []
   setCars: any
+  edit: boolean
+  setEdit: any
 }
 
 export const Context = createContext({} as context)
