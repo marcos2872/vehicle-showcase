@@ -3,18 +3,23 @@ import ICar from '../../interfaces/ICars'
 import { Body, Data, Delete, Edit, EditContainer, Image, Main, Price, Text, Title } from './previewCar.style'
 import Context from '../../context'
 import deletCar from '../../utils/axios/deletCar'
+import { IUser } from '../../interfaces/IUser'
 
 const PreviewCar: React.FC<{ data: ICar }> = ({ data }) => {
   const url = data.images[data.images.length - 1].url
   const formatValue = (value: number): string => value.toLocaleString('pt-BR')
   const { edit, cars ,setCars } = useContext(Context)
 
+  const user = JSON.parse(localStorage.getItem('verzelUser') ?? '[]') as IUser
+
   const heardleDelet = async (): Promise<void> => {
-    const deleted = await deletCar(data.id)
-    if (deleted === 200) {
+    const deleted = await deletCar(data.id, user?.token)
+
+    if (deleted === 'Deleted') {
       const filterCar = cars.filter(({ id }) => id !== data.id)
       setCars(filterCar)
     }
+    window.alert(deleted)
   }
 
   return (
