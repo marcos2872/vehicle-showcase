@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Div, Icon, Li, Logo, Main, Nav, NavLin, Ul } from './header.styled'
-import logo from '../../assets/logo.png'
+import logo from '../../../public/chave-do-carro.png'
+import { IUser } from '../../interfaces/IUser'
 
 const Header: React.FC = () => {
   const [url, setUrl] = useState('')
+  const [userName, setUserName] = useState('')
 
   useEffect(() => {
     const pathname = window.location.pathname
     setUrl(pathname)
+
+    const storage = localStorage.getItem('verzelUser')
+    if (storage) {
+      const user = JSON.parse(storage) as IUser
+      setUserName(user.name)
+    }
   }, [])
   return (
     <Main>
@@ -26,9 +34,9 @@ const Header: React.FC = () => {
           </NavLin>
         </Li>
         <Li>
-          <NavLin to='/register' style={{ color: `${url === '/register' ? '#4b7bc3' : '#525252'}` }}>
+          <NavLin to={userName ? '/user' : '/register'} style={{ color: `${url === '/register' ? '#4b7bc3' : '#525252'}` }}>
             <Icon />
-          Cadastre-se
+            {userName || 'Cadastre-se'}
           </NavLin>
         </Li>
       </Ul>

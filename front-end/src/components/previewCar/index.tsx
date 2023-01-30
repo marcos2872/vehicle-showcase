@@ -6,7 +6,8 @@ const PreviewCar: React.FC<{data: ICar}> = ({ data }) => {
   const url = data.images[data.images.length - 1].url
   const formatValue = (value: number): string => value.toLocaleString('pt-BR')
   return (
-    <Main>
+    <Main
+    to={`vehicle-details/${data.id}`}>
       <Image src={ url } alt='foto do carro' />
       <Data>
       <Title>

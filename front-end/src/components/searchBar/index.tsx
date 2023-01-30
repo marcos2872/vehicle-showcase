@@ -1,20 +1,21 @@
 import React, { useContext, useState } from 'react'
 import Context from '../../context'
+import ICar from '../../interfaces/ICars'
 import getCars from '../../utils/axios/getCars'
 import { IconsSearch, Input, InputComtainer, Main } from './searchBar.style'
 
 const SearchBar: React.FC = () => {
-  const { cars, setCars } = useContext(Context)
+  const { setCars } = useContext(Context)
   const [input, setInput] = useState('')
 
   const heardleKeyUp = async (key: string): Promise<void> => {
     if (key === 'Enter') {
+      const { data } = await getCars()
       if (input === '') {
-        const { data } = await getCars()
         setCars(data)
         return
       }
-      const search = cars.filter(({ model, brand }) => {
+      const search = (data as ICar[]).filter(({ model, brand }) => {
         if (brand.toLowerCase().includes(input.toLowerCase()) || model.toLowerCase().includes(input.toLowerCase())) {
           return true
         }

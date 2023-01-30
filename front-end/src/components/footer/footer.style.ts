@@ -7,7 +7,7 @@ height: 50px;
 width: 100%;
 align-items: center;
 justify-content: center;
-background-color: gray;
+background-color: #3274da;
 color: white;
 position: fixed;
 position: relative;

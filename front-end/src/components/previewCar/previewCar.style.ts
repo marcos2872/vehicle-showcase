@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
-export const Main = styled.main`
+export const Main = styled(NavLink)`
 display: flex;
 flex-direction: column;
 min-width: 280px;
@@ -8,14 +9,11 @@ height: 270px;
 
 box-shadow: 2px 2px 5px gray; 
 border-radius: 5px;
-margin-bottom: 2%;
+margin-bottom: 2px;
 align-items: center;
 cursor: pointer;
 `
-export const Image = styled.img.attrs((props) => ({
-  src: props.src,
-  alt: props.alt
-}))`
+export const Image = styled.img`
 width: 280px;
 height: 160px;
 border-top-left-radius: 5px;

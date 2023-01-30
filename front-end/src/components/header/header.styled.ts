@@ -19,7 +19,7 @@ align-items: center;
 justify-content: space-between;
 `
 export const Logo = styled.img`
-width: 80px;
+width: 70px;
 height: 60px;
 `
 export const Nav = styled.nav`
