@@ -4,11 +4,13 @@ import { Body, Data, Delete, Edit, EditContainer, Image, Main, Price, Text, Titl
 import Context from '../../context'
 import deletCar from '../../utils/axios/deletCar'
 import { IUser } from '../../interfaces/IUser'
+import { useNavigate } from 'react-router-dom'
 
 const PreviewCar: React.FC<{ data: ICar }> = ({ data }) => {
   const url = data.images[data.images.length - 1].url
   const formatValue = (value: number): string => value.toLocaleString('pt-BR')
   const { edit, cars ,setCars } = useContext(Context)
+  const navigate = useNavigate()
 
   const user = JSON.parse(localStorage.getItem('verzelUser') ?? '[]') as IUser
 
@@ -27,7 +29,7 @@ const PreviewCar: React.FC<{ data: ICar }> = ({ data }) => {
       {edit && (
       <EditContainer>
         <Delete onClick={heardleDelet}/>
-        <Edit />
+        <Edit onClick={() => navigate(`/car-edit/${data.id}`)}/>
       </EditContainer>
       )}
       <Body

@@ -4,11 +4,13 @@ import logo from '../../../public/chave-do-carro.png'
 import { IUser } from '../../interfaces/IUser'
 import { BiRun, BiPlusCircle, BiPencil } from 'react-icons/bi'
 import Context from '../../context'
+import { useNavigate } from 'react-router-dom'
 
 const Header: React.FC = () => {
   const [url, setUrl] = useState('')
   const [user, setUser] = useState<IUser>()
   const { edit, setEdit } = useContext(Context)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const pathname = window.location.pathname
@@ -65,7 +67,7 @@ const Header: React.FC = () => {
                       </ButtonComun>
                       {user.role === 'admin' && (
                         <>
-                          <ButtonComun>
+                          <ButtonComun onClick={() => navigate('/car-edit/add')}>
                             <BiPlusCircle />
                             Adicionar Carro
                           </ButtonComun>

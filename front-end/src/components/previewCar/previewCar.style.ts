@@ -59,8 +59,8 @@ display: flex;
 flex-direction: column;
 gap: 10px;
 min-width: 280px;
-position: fixed;
 padding: 10px;
+position: absolute;
 
 `
 export const Delete = styled(BiXCircle)`

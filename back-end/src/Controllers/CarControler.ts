@@ -4,6 +4,7 @@ import CarService from '../Services/CarService';
 export default class CarController {
   createCar = async (req: Request, res: Response) => {
     const car = req.body.body;
+  
     const { authorization } = req.headers as { authorization: string };
     const service = new CarService();
     
@@ -16,9 +17,9 @@ export default class CarController {
     const service = new CarService();
 
     if (id) {
-      const { cod, rep } = await service.findCarById(id);
+      const { cod, resp } = await service.findCarById(id);
       
-      return res.status(cod).json(rep);
+      return res.status(cod).json(resp);
     }
     const { cod, resp } = await service.findCars();  
     return res.status(cod).json(resp);

@@ -18,7 +18,11 @@ export default class CarModel {
 
   async findCars() {
     try {
-      const cars = await prisma.cars.findMany();
+      const cars = await prisma.cars.findMany({
+        orderBy: {
+          price: 'asc',
+        },
+      });
 
       return cars;
     } catch (error) {
@@ -29,7 +33,7 @@ export default class CarModel {
   async findCarById(id: string) {
     try {
       const cars = await prisma.cars.findUnique({ where: { id } });
-
+      
       return cars;
     } catch (error) {
       return null;

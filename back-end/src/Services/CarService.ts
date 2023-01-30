@@ -54,11 +54,11 @@ export default class CarService {
   async findCarById(id: string) {
     const carModel = new CarModel();
 
-    const allCars = await carModel.findCarById(id);
+    const Car = await carModel.findCarById(id);
 
-    if (!allCars) return { cod: 404, rep: { message: 'Not Found' } };
+    if (!Car) return { cod: 404, rep: { message: 'Not Found' } };
 
-    return { cod: 200, resp: allCars };
+    return { cod: 200, resp: Car };
   }
 
   async updateCar(id: string, obj: ICar, token: string) {
