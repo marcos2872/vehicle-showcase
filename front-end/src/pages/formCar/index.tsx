@@ -66,8 +66,6 @@ const FormCar: React.FC = () => {
       setImageIndex(images.length - 1)
     }
   }, [images])
-  console.log(images[imageIndex]);
-  
   return (
     <Main>
       <Container>

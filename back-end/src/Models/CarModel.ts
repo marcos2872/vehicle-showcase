@@ -41,9 +41,7 @@ export default class CarModel {
   }
 
   async updateCar(id: string, data: any) {
-    try {
-      console.log(id, data);
-      
+    try {      
       const updated = await prisma.cars.update({
         where: { id }, data,
       });

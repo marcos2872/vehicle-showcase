@@ -12,9 +12,8 @@ display: flex;
 flex-direction: row;
 flex-flow: wrap;
 flex-wrap: wrap;
-width: max-content;
+width: auto;
 gap: 20px;
-/* align-self: center; */
 `
 export const NotFound = styled.div`
 display: flex;
