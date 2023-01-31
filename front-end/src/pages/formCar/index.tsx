@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { useNavigate, useParams } from 'react-router-dom'
 import ICar from '../../interfaces/ICars'
 import getCarId from '../../utils/axios/getCarById'
 import postCar from '../../utils/axios/postCar'
-import { Main, Container, Title, Form, InputValeu, Enviar, Label, Body, Image, Data, TitlePreview, Text, Price, ExchangeContainer } from './formCar.styles'
-import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
+import putCar from '../../utils/axios/putCar'
+import { Body, Container, Data, Enviar, ExchangeContainer, Form, Image, InputValeu, Label, Main, Price, Text, Title, TitlePreview } from './formCar.styles'
 
 const FormCar: React.FC = () => {
   const [model, setModel] = useState('')
@@ -12,7 +13,7 @@ const FormCar: React.FC = () => {
   const [year, setYear] = useState<number>()
   const [mileage, setMileage] = useState<number>()
   const [price, setPrice] = useState<number>()
-  const [images, setImages] = useState<File[]>([])
+  const [images, setImages] = useState<any[] | Array<{ url: string }>>([])
   const [imageIndex, setImageIndex] = useState(0)
   const url = useParams() as { id: string }
   const navigate = useNavigate()
@@ -27,13 +28,13 @@ const FormCar: React.FC = () => {
         setMileage(carID.mileage)
         setPrice(carID.price)
         setYear(carID.year)
+        setImages(carID.images)
       }
     })()
   }, [])
 
+  const storage = JSON.parse(localStorage.getItem('verzelUser') ?? 'null')
   const heandleSubmit = async (): Promise<void> => {
-    const storage = JSON.parse(localStorage.getItem('verzelUser') ?? 'null')
-
     const form = new FormData()
     form.append('body', JSON.stringify({ model, brand, year, mileage, price }))
     images.forEach((curr: any) => {
@@ -43,7 +44,19 @@ const FormCar: React.FC = () => {
     const post = await postCar(form, storage.token)
 
     if (post === 'registered successfully') {
-      navigate('/')
+      window.alert('Cadastrado com sucesso')
+      return navigate('/')
+    }
+    window.alert(post)
+  }
+
+  const heandleSubmitUpdate = async (): Promise<void> => {
+    const data = { brand, model, mileage, year, price }
+    const post = await putCar(url.id, data, storage.token)
+
+    if (post === 'Updated') {
+      window.alert('Atualizado com sucesso')
+      return navigate('/')
     }
     window.alert(post)
   }
@@ -53,22 +66,28 @@ const FormCar: React.FC = () => {
       setImageIndex(images.length - 1)
     }
   }, [images])
-
+  console.log(images[imageIndex]);
+  
   return (
     <Main>
       <Container>
         <Title>Preview</Title>
         <Body>
-          <Image src={images.length ? URL.createObjectURL(images[imageIndex]) : ''} />
+          {images.length > 0 && url.id !== 'add' && (
+            <Image src={images[imageIndex].url ?? ''} />
+          )
+          }
+          {url.id === 'add' && (
+            <Image src={images.length ? URL.createObjectURL(images[imageIndex]) : ''} />
+          )}
+
           <ExchangeContainer>
 
             <BiArrowToLeft size={25} onClick={() => {
               if (images.length - 1 === imageIndex) return setImageIndex(0)
               setImageIndex((prev) => prev + 1)
             }} />
-
-            <Text>{`Total ${images.length} --- Imagen ${imageIndex ? imageIndex + 1 : '0'}`}</Text>
-
+            <Text>{`--- Total ${images.length} ---`}</Text>
             <BiArrowToRight size={25} onClick={() => {
               if (imageIndex === 0) return setImageIndex(images.length - 1)
               setImageIndex((prev) => prev - 1)
@@ -92,6 +111,9 @@ const FormCar: React.FC = () => {
         <Title>Form</Title>
         <Form onSubmit={(e) => {
           e.preventDefault()
+          if (url.id !== 'add') {
+            return heandleSubmitUpdate()
+          }
           heandleSubmit()
         }}
           encType='multipart/form-data'
@@ -146,17 +168,21 @@ const FormCar: React.FC = () => {
               onChange={({ target }) => setPrice(Number(target.value))}
             />
           </Label>
-          <Label>
-            Fotos
-            <InputValeu
-              required={url.id === 'add'}
-              type='file'
-              accept="image/png, image/jpeg"
-              onChange={({ target }) => {
-                setImages((prev: any) => [...prev, (target.files ?? [])[0]])
-              }}
-            />
-          </Label>
+          {url.id === 'add' && (
+            <Label>
+              Fotos
+              <InputValeu
+                required={url.id === 'add'}
+                type='file'
+                accept="image/png, image/jpeg"
+                onChange={({ target }) => {
+                  if (!target.files[0]) return
+                  setImages((prev: any) => [...prev, (target.files ?? [])[0]])
+                }}
+              />
+            </Label>
+
+          )}
           <Enviar
             type='submit'
             disabled={false}
