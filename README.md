@@ -37,14 +37,14 @@ Projeto todo criado em `typescript` com `ReactJS` e `NodeJs`
 * Garante que tenha o [docker](https://www.edivaldobrito.com.br/docker-no-ubuntu/) instalado em sua maquina.
 <br>
 * Garanta que as portas `'3306'`, `'5173'`, `'5180'`, não estejam em uso.<br>
-* Na raiz do projeto executo o comando `npm run dev` no terminal, assim ira criar e estartar os containers 'isso pode demorar um pouco'.<br>
+* Na raiz do projeto executo o comando Linux(`npm run dev`) ou Windows(`npm run devw`) no terminal, assim ira criar e estartar os containers 'isso pode demorar um pouco'.<br>
 Depois que os containers iniciarem para acessar o front-end cole no seu navegador a url `http://localhost:5173`,<br>
 o back-end estará rodando na porta `5180`, e o banco de dados na porta `3306`.<br><br>
 
 * ## `Sem o docker`<br>
 * Você precisara estar na raiz do projeto.
 * Você precisara abrir duas janelas do terminal.<br>
-* Em uma das abas do terminal execute o comando `npm run db`
+* Em uma das abas do terminal execute o comando Linux(`npm run db`) ou Windows(`npm run dbw`)
   em seguida o comando `npm run back`<br>
   na outa aba execute o comando `npm run front`<br>
 * para acessar o front-end cole no seu navegador a url `http://localhost:5173`,<br>
