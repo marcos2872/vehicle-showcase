@@ -33,7 +33,7 @@ const PreviewCar: React.FC<{ data: ICar }> = ({ data }) => {
       </EditContainer>
       )}
       <Body
-        /* to={`vehicle-details/${data.id}`} */
+        to={`vehicle-details/${data.id}`}
         >
         <Image src={url} alt='foto do carro' />
         <Data>

@@ -12,6 +12,8 @@ height: 70px;
 width: 100%;
 align-items: center;
 justify-content: center;
+position: absolute;
+top: 0;
 `
 export const Div = styled.div`
 display: flex;

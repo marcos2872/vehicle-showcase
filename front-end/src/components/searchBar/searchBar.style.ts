@@ -10,8 +10,7 @@ align-items: center;
 justify-content: center;
 background-color: #3274da;
 border-radius: 3px;
-/* position: absolute; */
-/* top: 70px; */
+margin-top: 70px;
 `
 export const InputComtainer = styled.div`
 display: flex;

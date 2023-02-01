@@ -8,11 +8,11 @@ justify-content: center;
 margin-bottom: 20px;
 `
 export const Cars = styled.div`
-display: flex;
+display:flex;
+grid-row: auto;
 flex-direction: row;
-flex-flow: wrap;
 flex-wrap: wrap;
-width: auto;
+align-self: start;
 gap: 20px;
 `
 export const NotFound = styled.div`

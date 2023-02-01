@@ -1,20 +1,23 @@
 import styled from 'styled-components'
-// import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { BiXCircle, BiPencil } from 'react-icons/bi'
 
 export const Main = styled.div`
 display: flex;
 flex-direction: column;
-min-width: 280px;
+width: 280px;
 height: 270px;
-
 box-shadow: 2px 2px 5px gray; 
 border-radius: 5px;
 margin-bottom: 2px;
-align-items: center;
 cursor: pointer;
+transition: all 0.5s;
+:hover {
+  box-shadow: 5px 5px 15px gray;
+  transform: scale(1.05);
+}
 `
-export const Body = styled.div`
+export const Body = styled(NavLink)`
 display: flex;
 flex-direction: column;
 min-width: 280px;
