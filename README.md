@@ -55,12 +55,7 @@ que ira abrir uma janela no navegador mostrando as tabelas.
 
 ## Dados importantes
 
-* caso queira testar as funções de administrador faça login com o usuário `admin@verzel.com` e senha `1234567890`.
-<br>
-<br>
-<br>
-<br>
-<br>
+* caso queira testar as funções de administrador faça login com o usuário `admin@verzel.com` e senha `1234567890`.<br>
 * ## Avisos
 * Apesar de já ter disponibilizado o projeto ele ainda não esta pronto, ainda pretendo criar filtros<br> para busca de carros, ajustar o css, fazer a responsividade, criar testes, e algumas telas que ainda<br> precisão ser desenvolvidas.
 * ainda pretendo documentar as rotas da Api, mas por enquanto disponibilizei arquivos exportados do insomnia na raiz do projeto<br>
