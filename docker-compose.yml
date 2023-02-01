@@ -25,10 +25,11 @@ services:
     environment:
       - VITE_APP_BACK_END_URL=http://localhost:5180
       - PORT_FRONT=5173
+    # command: bash -c 'npm i && npm run dev'
     networks:
       - project-verzel
     volumes:
-      - ./front-end:/srv/front-end
+      - ./front-end/src:/srv/front-end/src
     depends_on:
       - backend
 

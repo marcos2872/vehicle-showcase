@@ -20,7 +20,8 @@ const storageTypes = {
       cb(null, path.resolve(dir));
     },
     filename: (_req, file, cb) => {
-      cb(null, file.originalname);
+      const name = file.originalname.replace(' ' ,'')
+      cb(null, name);
     },
   }),
 };

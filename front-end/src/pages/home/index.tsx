@@ -14,6 +14,8 @@ const Home: React.FC = () => {
     (async () => {
       const { data } = await getCars()
       setCars(data)
+      console.log(data);
+      
     })()
   }, [])
 
