@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import { BiXCircle, BiPencil } from 'react-icons/bi'
 
 export const Main = styled.div`
@@ -14,7 +14,7 @@ margin-bottom: 2px;
 align-items: center;
 cursor: pointer;
 `
-export const Body = styled(NavLink)`
+export const Body = styled.div`
 display: flex;
 flex-direction: column;
 min-width: 280px;

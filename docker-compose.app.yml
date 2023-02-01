@@ -12,3 +12,8 @@ services:
     restart: 'always'
     volumes:
       - ./srv/db
+    networks:
+      - project-verzel
+networks:
+  project-verzel:
+    name: project-verzel

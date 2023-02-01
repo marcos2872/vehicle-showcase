@@ -6,10 +6,10 @@
   "dependencies": {
   },
   "scripts": {
-    "dev": "sudo docker-compose up -d --build && cd back-end && npm run db",
-    "db": "sudo docker-compose -f docker-compose.app.yml up --build && cd back-end && npm run db",
-    "back": "cd back-end && yarn &&  yarn dev",
-    "front": "cd front-end && yarn && tmux yarn dev",
+    "dev": "npm run db &&sudo docker-compose up -d --build",
+    "db": "sudo docker-compose -f docker-compose.app.yml up -d && cd back-end && npm i && npm run db",
+    "back": "cd back-end && npm i &&  npm run dev",
+    "front": "cd front-end && npm i && npm run dev",
     "studio": "cd back-end && npx prisma studio"
   },
   "author": "Marcos",

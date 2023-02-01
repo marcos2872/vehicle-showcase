@@ -33,26 +33,24 @@ Projeto todo criado em `typescript` com `ReactJS` e `NodeJs`
 
 ## Como rodar o projeto:<br>
 
-* Os comandos serão executados com [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable) caso prefira pode trocar `yarn` por `npm run`.
-
 * ## `Docker`<br>
 * Garante que tenha o [docker](https://www.edivaldobrito.com.br/docker-no-ubuntu/) instalado em sua maquina.
 <br>
-* Garanta que as portas `3306`, `5173`, `5180`, não estejam em uso.<br>
-* Na raiz do projeto executo o comando `yarn dev` no terminal, assim ira criar e estartar os containers 'isso pode demorar um pouco'.<br>
+* Garanta que as portas `'3306'`, `'5173'`, `'5180'`, não estejam em uso.<br>
+* Na raiz do projeto executo o comando `npm run dev` no terminal, assim ira criar e estartar os containers 'isso pode demorar um pouco'.<br>
 Depois que os containers iniciarem para acessar o front-end cole no seu navegador a url `http://localhost:5173`,<br>
 o back-end estará rodando na porta `5180`, e o banco de dados na porta `3306`.<br><br>
 
 * ## `Sem o docker`<br>
 * Você precisara estar na raiz do projeto.
 * Você precisara abrir duas janelas do terminal.<br>
-* Em uma das abas do terminal execute o comando `yarn db`
-  em seguida o comando `yarn back`<br>
-  na outa aba execute o comando `yarn front`<br>
+* Em uma das abas do terminal execute o comando `npm run db`
+  em seguida o comando `npm run back`<br>
+  na outa aba execute o comando `npm run front`<br>
 * para acessar o front-end cole no seu navegador a url `http://localhost:5173`,<br>
 o back-end estará rodando na porta `5180`, e o banco de dados na porta `3306`.<br><br>
 
-* caso queira ver os dados salvos no banco de dados execute no terminal o comando `yarn studio`<br>
+* caso queira ver os dados salvos no banco de dados execute no terminal o comando `npm run studio`<br>
 que ira abrir uma janela no navegador mostrando as tabelas.
 
 ## Dados importantes
