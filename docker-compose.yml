@@ -10,31 +10,45 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: 'always'
+    volumes:
+      - ./srv/db
+    networks:
+      - project-verzel
 
-  # frontend:
-  #   build: ./front-end
-  #   container_name: front-end_verzel
-  #   working_dir: /srv/front-end
-  #   ports:
-  #     - 5173:5173
-  #   restart: always
-  #   networks:
-  #     - project-verzel
-  #   depends_on:
-  #     - backend
+  frontend:
+    build: ./front-end
+    container_name: front-end_verzel
+    working_dir: /srv/front-end
+    ports:
+      - 5173:5173
+    restart: always
+    environment:
+      - VITE_APP_BACK_END_URL=http://localhost:5180
+      - PORT_FRONT=5173
+    networks:
+      - project-verzel
+    volumes:
+      - ./front-end:/srv/front-end
+    depends_on:
+      - backend
 
-  # backend:
-  #   container_name: back-end_verzel
-  #   build: ./back-end
-  #   restart: always
-  #   working_dir: /srv/back-end
-
-  #   ports:
-  #     - 5180:5180
-  #   networks:
-  #     - project-verzel
-  #   depends_on:
-  #     - mysql
+  backend:
+    container_name: back-end_verzel
+    build: ./back-end
+    restart: always
+    working_dir: /srv/back-end
+    environment:
+      - DATABASE_URL=mysql://root:123456@mysql:3306/verzel?schema=public
+      - PORT=5180
+      - JWT_KEY=teste123
+    ports:
+      - 5180:5180
+    volumes:
+      - ./back-end:/srv/back-end
+    networks:
+      - project-verzel
+    depends_on:
+      - mysql
 
   # storage:
   #   container_name: storage_verzel

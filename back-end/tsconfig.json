@@ -13,5 +13,9 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "typedocOptions": {
+    "entryPoints": ["src/app.ts"],
+    "out": "docs"
+}
 }

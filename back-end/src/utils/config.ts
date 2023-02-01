@@ -6,7 +6,7 @@ let fileNmae = '';
 
 const storageTypes = {
   local: multer.diskStorage({
-    destination: (req, _file, cb) => {
+    destination: (req, file, cb) => {
       const data = req.body.body;
       const { brand, model, year, mileage, price } = JSON.parse(data);
       const dirName = brand + model + year + mileage + price;

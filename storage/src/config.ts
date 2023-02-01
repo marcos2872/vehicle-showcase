@@ -7,12 +7,18 @@ let fileNmae = ''
 const storageTypes = {
   local: multer.diskStorage({
     destination: (req, _file, cb) => {
-      const { id } = req.body
-      const dir = path.join(__dirname, '..', `public/${id}`)
+      const data = req.body.body;
+      console.log(data);
+      
+      const { brand, model, year, mileage, price } = JSON.parse(data);
+      const dirName = brand + model + year + mileage + price;
+      
+      const dir = path
+        .join(__dirname, '..', `public/${dirName.replace(' ', '')}`);
       if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir)
+        fs.mkdirSync(dir);
       }
-      fileNmae = dir
+      fileNmae = dir;
       cb(null, path.resolve(dir));
     },
     filename: (_req, file, cb) => {

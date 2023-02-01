@@ -4,8 +4,6 @@ import fs from 'fs';
 import CarModel from '../Models/CarModel';
 import ICar from '../Interfaces/ICar';
 import 'dotenv/config';
-import jwt from '../utils/token';
-import prisma from '../Models/prisma';
 
 const { PORT } = process.env;
 const m501 = 'Not Implemented';
@@ -24,15 +22,10 @@ export default class CarService {
     return arrayImages;
   }
 
-  async createCar(obj: ICar, token: string) {
+  async createCar(obj: ICar) {
     const carModel = new CarModel();
     const { brand, model, year, mileage, price } = obj;
     const arrayImages = this.fotmatImageArray(obj);
-
-    const id = jwt.tokenResolve(token);
-    const role = await prisma.users.findUnique({ where: { id } });
-    
-    if (role?.role === 'user') return { cod: 403, resp: { message: 'doesn\'t have permission' } };
     
     const newCar = await carModel.createCar({
       brand, model, year, mileage, price, images: arrayImages,
@@ -61,14 +54,8 @@ export default class CarService {
     return { cod: 200, resp: Car };
   }
 
-  async updateCar(id: string, obj: ICar, token: string) {
+  async updateCar(id: string, obj: ICar) {
     const carModel = new CarModel();
-
-    const idUser = jwt.tokenResolve(token);
-    const role = await prisma.users.findUnique({ where: { id: idUser } });
-    
-    if (role?.role === 'user') return { cod: 403, resp: { message: 'doesn\'t have permission' } };
-
     const update = await carModel.updateCar(id, obj);
 
     if (!update) return { cod: 501, resp: { message: m501 } };

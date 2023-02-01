@@ -14,16 +14,18 @@ const PORT = 5190
 
 app.post('/images', multer(config).array('images'), (req: Request, res: Response) => {
   try {
-    const { id } = req.body
-    const dir = path.join(__dirname, '..', `public/${id}`)
-  
-    const imgs = fs.readdirSync(dir)
-  
-    const arrayImages = imgs.reduce((acc: string[], curr: string) => (
-      [...acc, `http://localhost:${PORT}/images/${id}/${curr}` ]
-      ), []);
+    const car = req.body.body;
+    const { brand, model, year, mileage, price } = JSON.parse(car);
+
+    const dirName = (brand + model + year + mileage + price).replace(' ', '');
+
+    const dir = path.join(__dirname, `../public/${dirName}`);
+    const imgs = fs.readdirSync(dir);
+    const arrayImages = imgs.reduce((acc: { url: string }[], curr: string) => (
+      [...acc, { url: `http://localhost:${PORT}/images/${dirName}/${curr}`.replace(' ', '') }]
+    ), []);
       
-    res.status(200).json(arrayImages)
+    res.status(200).json({})
   } catch (error) {
     console.log(error)
     res.status(500).send('Internal Server Error')

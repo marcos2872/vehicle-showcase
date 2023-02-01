@@ -37,6 +37,8 @@ const FormCar: React.FC = () => {
   const heandleSubmit = async (): Promise<void> => {
     const form = new FormData()
     form.append('body', JSON.stringify({ model, brand, year, mileage, price }))
+    console.log(images[0])
+
     images.forEach((curr: any) => {
       form.append('images', curr)
     })
