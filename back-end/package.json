@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start": "nodemon src/server.ts",
+    "start": "tsnd src/server.ts",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "db": "npx prisma migrate dev",
     "db:example": "npx prisma migrate dev --name example",
