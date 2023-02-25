@@ -7,7 +7,6 @@ COPY package*.json ./
 RUN ["npm", "i"] 
 COPY . .
 
-# RUN ["npm", "run", "db"]
 CMD ["npm", "run", "dev"]
 
 

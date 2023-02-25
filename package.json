@@ -6,8 +6,8 @@
   "dependencies": {
   },
   "scripts": {
-    "dev": "npm run db && sudo docker-compose up -d --build",
-    "db": "sudo docker-compose -f docker-compose.app.yml up -d && cd back-end && npm i && npm run db",
+    "dev": "npm run db && docker-compose up -d --build",
+    "db": "docker-compose -f docker-compose.app.yml up -d && cd back-end && npm i && npm run db",
     "devw": "npm run dbw && docker-compose up -d --build",
     "dbw": " docker-compose -f docker-compose.app.yml up -d && cd back-end && npm i && npm run db",
     "back": "cd back-end && npm i &&  npm run dev",
